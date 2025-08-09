@@ -16,6 +16,7 @@ class Grammar:
         if name in ['python', 'go', 'sql', 'tiny', 'calc', 'json', 'c', 'java', 'prover9', 'invariants']:
             grammar_filename = f'{os.path.dirname(__file__)}/{name}.lark'
         elif name.endswith('.lark'): 
+            self.name = 'python'
             if os.path.exists(name):
                 # In this case we assume that the user provides the full path to the grammar file
                 grammar_filename = name

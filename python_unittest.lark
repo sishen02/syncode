@@ -12,7 +12,10 @@
 //       eval_input is the input for the eval() functions.
 // NB: compound_stmt in single_input is followed by extra _NL!
 
-start: "import" dotted_as_names _NL "class" NAME ["(" [arguments] ")"] ":" _NL _INDENT "def" "setUp" "(" parameters? ")" ["->" test] ":" ( suite | _NL) "def" "tearDown" "(" parameters? ")" ["->" test] ":" ( suite | _NL) stmt+ _DEDENT
+start: "import" dotted_as_names _NL "class" NAME ["(" [arguments] ")"] ":" _NL _INDENT "def" "setUp" "(" parameters? ")" ["->" test] ":" ( suite | _NL) "def" "tearDown" "(" parameters? ")" ["->" test] ":" ( suite | _NL) stmt+ _DEDENT if_stmt
+
+single_input: _NL | simple_stmt | compound_stmt _NL
+eval_input: testlist _NL*
 
 !decorator: "@" dotted_name [ "(" [arguments] ")" ] _NL
 decorators: decorator+
@@ -159,11 +162,11 @@ yield_arg: "from" test | testlist
 // number: DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | FLOAT_NUMBER | IMAG_NUMBER
 number: DEC_NUMBER | HEX_NUMBER | OCT_NUMBER | FLOAT_NUMBER 
 
-string: STRING
+string: STRING | LONG_STRING 
 // Tokens
 
 NAME: /[a-zA-Z_]\w*/
-COMMENT: /#.*(\n[\t ]*)+/
+COMMENT: /#.*(\n[\t ]*)+/ | LONG_STRING
 _NL: ( /(\r?\n[\t ]*)+/ | COMMENT)+
 
 
@@ -173,6 +176,8 @@ _NL: ( /(\r?\n[\t ]*)+/ | COMMENT)+
 // Using (?!'') and (?!"") to avoid ambuigity with empty LONG_STRING
 STRING : /[ubf]?r?("(?!"").*?"|'(?!'').*?')/is 
 
+// Had to seperate these since regex disjoint check in Lark lexer validation was too slow
+LONG_STRING: /[ubf]?r?("""(?<!\\).*?"""|'''(?<!\\).*?''')/is
 
 DEC_NUMBER: /0|[1-9]\d*/i
 HEX_NUMBER.2: /0x[\da-f]*/i
