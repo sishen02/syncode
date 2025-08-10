@@ -1,26 +1,24 @@
 import unittest
 
-# three test cases for maximal profit problem
+# three test cases for is_palindrome function
 class test(unittest.TestCase):
     def setUp(self):
-        def solution(prices):
-            min_price = float('inf')
-            max_profit = 0
-            for price in prices:
-                if price < min_price:
-                    min_price = price
-                elif price - min_price > max_profit:
-                    max_profit = price - min_price
-            return max_profit
-        self.solution = solution
+        def is_palindrome(s: str) -> bool:
+            '''test whether a string is a palindrome'''
+            cleaned = ''.join(filter(str.isalnum, s)).lower()
+            return cleaned == cleaned[::-1]
+        self.solution = is_palindrome
     
     def tearDown(self):
-        self.solution = solution
+        self.solution = None
     
-    def test_max_profit(self):
-        self.assertEqual(self.solution(1.0), 1.0)
-        self.assertEqual(self.solution(1.0), 1.0)
-        self.assertEqual(self.solution(1.0), 1.0)
-        self.assertEqual(self.solution(1.0), 1.0)
-        self.assertEqual(self.solution(1.0), 1.0)
-        self.assertEqual(self.solution(1.0), 1
+    def test_is_palindrome(self):
+        self.assertEqual(is_palindrome(self.solution), True)
+    
+    def test_is_palindrome_with_empty_string(self):
+        self.assertEqual(is_palindrome(self.solution), False)
+    
+    def test_is_palindrome_with_empty_string_with_empty_string(self):
+        self.assertEqual(is_palindrome(self.solution), False)
+    
+    def test_is_palindrome_

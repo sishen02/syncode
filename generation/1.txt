@@ -7,6 +7,6 @@ OK
 Model: microsoft/phi-1 Coverage Report
 Name              Stmts   Miss  Cover
 -------------------------------------
-generation\1.py      22      0   100%
+generation\1.py      23      5    78%
 -------------------------------------
-TOTAL                22      0   100%
+TOTAL                23      5    78%

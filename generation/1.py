@@ -1,27 +1,34 @@
 import unittest
 
-# three test cases for maximal profit problem
+# three test cases for is_palindrome function
 class test(unittest.TestCase):
     def setUp(self):
-        def solution(prices):
-            min_price = float('inf')
-            max_profit = 0
-            for price in prices:
-                if price < min_price:
-                    min_price = price
-                elif price - min_price > max_profit:
-                    max_profit = price - min_price
-            return max_profit
-        self.solution = solution
+        def is_palindrome(s: str) -> bool:
+            '''test whether a string is a palindrome'''
+            cleaned = ''.join(filter(str.isalnum, s)).lower()
+            return cleaned == cleaned[::-1]
+        self.solution = is_palindrome
     
     def tearDown(self):
         pass
     
-    def test_max_profit(self):
-        self.assertEqual(self.solution([7, 1, 5, 3, 6, 4]), 5)
-        self.assertEqual(self.solution([7, 6, 4, 3, 1]), 0)
-        self.assertEqual(self.solution([1, 2, 3, 4, 5]), 4)
-        self.assertEqual(self.solution([1]), 0)
+    def test_palindrome(self):
+        self.assertTrue(self.solution("racecar"))
+        self.assertTrue(self.solution("A man, a plan, a canal, Panama!"))
+        self.assertFalse(self.solution("hello"))
         
+# four test cases for is_palindrome function
+class test2(unittest.TestCase):
+    def setUp(self):
+        def is_palindrome(s: str) -> bool:
+            '''test whether a string is a palindrome'''
+            cleaned = ''.join(filter(str.isalnum, s)).lower()
+            return cleaned == cleaned[::-1]
+        self.solution = is_palindrome
+    
+    def tearDown(self):
+        pass
+
 if __name__ == '__main__':
     unittest.main()
+    
