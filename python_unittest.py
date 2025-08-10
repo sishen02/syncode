@@ -28,21 +28,30 @@ class test(unittest.TestCase):
 """
     output = syn_llm.infer(prefix)[0]
     program = prefix + output
-    print(program)
-    print()
     with open(f'generation/{i}.py', 'w') as f:
         f.write(program)
 
 for i, model in enumerate(models):
     try:
         print(f"Model: {model} Start Testing")
-        subprocess.run(
-            ['coverage', 'run', f'generation/{i}.py']
+        result = subprocess.run(
+            ['coverage', 'run', f'generation/{i}.py'],
+            capture_output=True,
+            text=True
         )
-        subprocess.run(
-            ['coverage', 'report']
+        with open(f'generation/{i}.txt', 'w') as f:
+            f.write(f'Model: {model} Test Result\n')
+            f.write(result.stderr)
+        coverage = subprocess.run(
+            ['coverage', 'report'],
+            capture_output=True,
+            text=True
         )
+        with open(f'generation/{i}.txt', 'a') as f:
+            f.write(f'Model: {model} Coverage Report\n')
+            f.write(coverage.stdout)
     except Exception as e:
-        print("Error running tests")
-        print(f"Model: {model}")
-        print(e)
+        print(f"Model: {model} Error running tests")
+        with open(f'generation/{i}.txt', 'w') as f:
+            f.write(f'Model: {model} Error running tests\n')
+            f.write(e)
