@@ -19,3 +19,13 @@ class test(unittest.TestCase):
         
 if __name__ == '__main__':
     unittest.main()
+    
+# Output:
+#....
+# ----------------------------------------------------------------------
+# Ran 1 test in 0.000s
+#
+# OK
+```
+
+In the above example, we have defined a test case `test` that inherits from `unittest.TestCase`. We have defined a setUp method that initializes the `is_palindrome` function and a tearDown method that does nothing. We have also

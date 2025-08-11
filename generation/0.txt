@@ -1,12 +1,5 @@
 Model: microsoft/phi-2 Test Result
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-OK
+D:\Users\sishen\miniconda3\envs\sc\Lib\site-packages\coverage\control.py:921: CoverageWarning: No data was collected. (no-data-collected)
+  self._warn("No data was collected.", slug="no-data-collected")
 Model: microsoft/phi-2 Coverage Report
-Name              Stmts   Miss  Cover
--------------------------------------
-generation\0.py      15      0   100%
--------------------------------------
-TOTAL                15      0   100%
+No data to report.
