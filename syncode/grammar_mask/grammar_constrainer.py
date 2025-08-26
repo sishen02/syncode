@@ -184,8 +184,8 @@ class GrammarConstrainer:
                     accept_mask = accept_mask[: len(scores[idx])]
                 scores[idx] = scores[idx].masked_fill(~accept_mask.to(scores.device), -float("inf"))
             else: # Otherwise, report the error and mask no tokens
-                logger.debug('No acceptable tokens for the current partial code!')
-                logger.debug(repr(res))
+                logger.info('No acceptable tokens for the current partial code!')
+                logger.info(repr(res))
 
         return scores
 
